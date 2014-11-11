@@ -7,6 +7,5 @@ class Play < ActiveRecord::Base
   end
 
   def score
-    word.upcase.chars.inject(0){|sum, letter| sum + letter_scores[letter]}
   end
 end
