@@ -15,7 +15,6 @@ class MakeAPlayTest < ActionDispatch::IntegrationTest
   end
 
   def test_blank_word_is_not_played_and_can_be_corrected
-    skip
     visit '/plays'
     click_link_or_button 'Play New Word'
     fill_in 'play[word]', :with => ""
@@ -33,7 +32,6 @@ class MakeAPlayTest < ActionDispatch::IntegrationTest
   end
 
   def test_words_with_non_letters_are_rejected
-    skip
     visit '/plays'
     click_link_or_button 'Play New Word'
 
@@ -51,11 +49,14 @@ class MakeAPlayTest < ActionDispatch::IntegrationTest
   end
 
   def test_a_play_is_deleted
-    skip
-    # visit /plays
-    # find the first play
-    # click the delete link
-    # confirm that you're back on /plays
-    # confirm that the word is gone
+    Play.create!(word: 'assets')
+
+    visit '/plays'
+    within('li', text: 'assets') do
+      click_on 'Delete'
+    end
+
+    assert_equal '/plays', current_path
+    refute page.has_content?('assets')
   end
 end
