@@ -1,0 +1,13 @@
+<h1>New Word</h1>
+
+<% if @play.errors.any? %>
+	<div id="errors">
+		<%= @play.errors.full_messages.join(', ') %>
+	</div>
+<% end %>
+
+<%= form_for(@play) do |f| %>
+	<%= f.label :word %>
+	<%= f.text_field :word %>
+	<%= f.submit 'Play!' %>
+<% end %>
