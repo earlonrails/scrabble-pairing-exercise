@@ -2,9 +2,18 @@
 
 <%= link_to "Play New Word", '#' %>
 
+<%= form_for @play do |f| %>
+  <%= f.label :word %>:
+  <%= f.text_field :word %><br />
+
+  <%= f.submit "Play!" %>
+<% end %>
+
 <div id="previous_words">
   <h3>Previous Words</h3>
   <ul id="plays">
-    <li>Previous words go here</li>
+    <% @plays.each do |p| %>
+      <li><%= p.word.downcase %> : <%= p.score %></li>
+    <% end %>
   </ul>
 </div>
